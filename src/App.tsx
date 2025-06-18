@@ -1,18 +1,18 @@
-import "./App.css";
 import { Routes, Route } from "react-router";
-import Header from "./components/Header/Header.tsx";
 import GeneratePage from "./pages/GeneratePage/GeneratePage.tsx";
 import HistoryPage from "./pages/HistoryPage/HistoryPage.tsx";
-import HomePage from "./pages/HomePage/HomePage.tsx";
+import UploadPage from "./pages/UploadPage/UploadPage.tsx";
+import Layout from "./components/Layout/Layout.tsx";
 
 function App() {
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/generate" element={<GeneratePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<UploadPage />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/generate" element={<GeneratePage />} />
+        </Route>
       </Routes>
     </>
   );

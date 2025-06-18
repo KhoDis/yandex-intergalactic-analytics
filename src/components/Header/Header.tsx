@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
+import LogoName from "./LogoName.tsx";
+import Navigation from "./Navigation.tsx";
 
 function Header() {
   return (
-    <nav>
-      <Link to="/">Главная</Link>
-      <Link to="/history">История</Link>
-      <Link to="/generate">Генератор</Link>
-    </nav>
+    <header className={styles.header}>
+      <LogoName />
+      <Navigation />
+    </header>
   );
 }
 
