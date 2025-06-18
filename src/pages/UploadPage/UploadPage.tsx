@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-function UploadPage() {
+export const UploadPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [rows, setRows] = useState(1000);
   // const { upload } = useAnalyticsStore();
@@ -34,6 +34,4 @@ function UploadPage() {
       {/*)}*/}
     </div>
   );
-}
-
-export default UploadPage;
+};

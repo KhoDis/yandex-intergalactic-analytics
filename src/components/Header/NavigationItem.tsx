@@ -9,21 +9,14 @@ type NavigationItemProps = {
   icon: React.ReactNode;
 };
 
-function NavigationItem({ title, to, icon }: NavigationItemProps) {
-  return (
-    <NavLink
-      to={to}
-      className={({ isActive }) => {
-        return clsx(
-          styles["menu-item"],
-          isActive && styles["menu-item_active"],
-        );
-      }}
-    >
-      {icon}
-      <span className={styles.navTitle}>{title}</span>
-    </NavLink>
-  );
-}
-
-export default NavigationItem;
+export const NavigationItem = ({ title, to, icon }: NavigationItemProps) => (
+  <NavLink
+    to={to}
+    className={({ isActive }) => {
+      return clsx(styles["menu-item"], isActive && styles["menu-item_active"]);
+    }}
+  >
+    {icon}
+    <span className={styles.navTitle}>{title}</span>
+  </NavLink>
+);
