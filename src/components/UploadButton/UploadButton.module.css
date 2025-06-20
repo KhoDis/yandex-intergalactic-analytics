@@ -1,4 +1,7 @@
 .upload-button {
+    --upload-button-border-radius: 10px;
+    --upload-button-size: 70px;
+
     display: flex;
     gap: 10px;
     align-items: center;
@@ -10,12 +13,12 @@
     color: var(--color-text);
 }
 
-.upload-button__content {
+.upload-button__file {
     border: none;
     padding: var(--button-padding);
-    border-radius: 8px;
+    border-radius: var(--upload-button-border-radius);
     background: #FFFFFF;
-    height: 70px;
+    height: var(--upload-button-size);
     width: 100%;
 }
 
@@ -31,39 +34,22 @@
     color: var(--color-text);
 }
 
-.upload-button__dropzone {
-    background: white;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.upload-button__file {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    position: relative;
-}
-
 .upload-button__file--uploaded { background: #e0b0ff; }
 .upload-button__file--parsing { background: #d9b3ff; }
 .upload-button__file--done { background: #d0f0c0; }
 .upload-button__file--error { background: #ff6f42; color: white; }
 
 .upload-button__close {
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    background: black;
+    background: var(--button-color-dark);
     color: white;
     border: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .upload-button__spinner {

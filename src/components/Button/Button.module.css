@@ -20,7 +20,7 @@
 }
 
 .button--clear {
-    background-color: #201B10;
+    background-color: var(--button-color-dark);
     color: #FFFFFF;
 }
 
