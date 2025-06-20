@@ -2,12 +2,20 @@
     --color-bg: #FCE2FF;
     --color-text: #201B10;
     --color-primary: #CB81FF;
+    --color-primary-light: #EACDFF;
+    --color-success-light: #D4FAE6;
+    --color-disabled: #787878;
+    --color-text-primary: #CB81FF;
 
     --font-main: 'Roboto', sans-serif;
     --font-regular: 400;
     --font-medium: 500;
     --font-bold: 700;
     --font-size: 1.875rem;
+
+    --button-padding: 15px 27px 15px 27px;
+    --button-border-radius: 25px;
+    --button-font-size: 35px;
 }
 
 body {
