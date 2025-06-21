@@ -1,19 +1,23 @@
-import styles from "./UploadButton.module.css";
+import styles from "./UploadFile.module.css";
 import React from "react";
 import clsx from "clsx";
-import type { UploadedFile, UploadStatus } from "../../types/types.tsx";
+import type { UploadStatus } from "../../stores/useUploadStore.ts";
 
-export type UploadButtonProps = {
-  file: UploadedFile | null;
+export type UploadFileProps = {
+  file: File | null;
+  status: UploadStatus;
   onUpload: (file: File) => void;
   onReset: () => void;
+  onChoose: () => void;
 };
 
-export const UploadButton = ({
+export const UploadFile = ({
   file,
+  status,
   onUpload,
   onReset,
-}: UploadButtonProps) => {
+  onChoose,
+}: UploadFileProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) return onUpload(file);
@@ -22,6 +26,7 @@ export const UploadButton = ({
   const getStatusText = (status: UploadStatus) => {
     switch (status) {
       case "idle":
+      case "choosing":
         return "или перетащите сюда";
       case "uploaded":
         return "файл загружен!";
@@ -40,7 +45,10 @@ export const UploadButton = ({
     <div className={styles["upload-button"]}>
       {!file && (
         <>
-          <label className={styles["upload-button__file"]}>
+          <label
+            className={styles["upload-button__file"]}
+            onClick={() => onChoose()}
+          >
             Загрузить файл
             <input type="file" onChange={handleFileChange} hidden />
           </label>
@@ -54,7 +62,7 @@ export const UploadButton = ({
         <div
           className={clsx(
             styles["upload-button__file"],
-            styles[`upload-button__file--${file.status}`],
+            styles[`upload-button__file--${status}`],
           )}
         >
           {file.name}
@@ -62,10 +70,10 @@ export const UploadButton = ({
             <img src="/cancel-icon.svg" alt="close" />
           </button>
           <div className={styles["upload-button__text"]}>
-            {file.status === "parsing" ? (
+            {status === "parsing" ? (
               <div className="upload-button__spinner" />
             ) : (
-              getStatusText(file.status)
+              getStatusText(status)
             )}
           </div>
         </div>

@@ -22,9 +22,11 @@ export const aggregate = async (
 ): Promise<ReadableStream<Uint8Array> | null> => {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("rows", String(rows));
 
-  const response = await fetch(`${API_URL}/aggregate`, {
+  const params = new URLSearchParams({
+    rows: String(rows),
+  });
+  const response = await fetch(`${API_URL}/aggregate?${params}`, {
     method: "POST",
     body: formData,
   });

@@ -3,3 +3,16 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 10px 39px;
 }
+
+.no-highlights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: var(--font-regular);
+    color: var(--color-primary);
+    text-align: center;
+    height: 100%;
+    flex-grow: 1;
+}
