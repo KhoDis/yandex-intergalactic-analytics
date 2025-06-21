@@ -4,12 +4,12 @@ import styles from "./UploadPage.module.css";
 import { useUploadStore } from "../../stores/useUploadStore.ts";
 
 export const UploadPage = () => {
-  const { highlights } = useUploadStore();
+  const { highlight } = useUploadStore();
 
   return (
     <div className={styles.container}>
       <Uploader />
-      <Highlights highlights={highlights} />
+      <Highlights highlight={highlight} />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import styles from "./Uploader.module.css";
 import { Button } from "../Button/Button.tsx";
 import { UploadFile } from "../UploadFile/UploadFile.tsx";
 import { aggregate } from "../../api/client.ts";
-import type { Highlight } from "../../types/types.tsx";
+import type { RawHighlight } from "../../types/types.tsx";
 import { useUploadStore } from "../../stores/useUploadStore.ts";
 import clsx from "clsx";
 
@@ -16,36 +16,31 @@ export const Uploader = () => {
     setFile,
     setStatus,
     setLoading,
-    addHighlight,
+    setHighlight,
     clearHighlights,
   } = useUploadStore();
 
   const handleFileUpload = async () => {
-    console.log("File uploading", file?.name);
     if (!file) return;
 
     try {
       setLoading(true);
       setStatus("parsing");
-      console.log("File uploaded", rows);
 
       const stream = await aggregate(file, rows);
       if (!stream) throw new Error("No stream");
 
       setStatus("parsing");
-      console.log("File aggregated");
 
       // Long process here
-      await streamToHighlights(stream, addHighlight);
+      await streamToHighlights(stream, setHighlight);
 
       setStatus("done");
-      console.log("Highlights parsed");
 
       saveToHistory(file.name); // localStorage
     } catch (err) {
       console.error(err);
       setStatus("error");
-      console.log("File failed to upload");
     } finally {
       setLoading(false);
     }
@@ -56,7 +51,7 @@ export const Uploader = () => {
     const newEntry = {
       date: new Date().toISOString(),
       fileName,
-      highlights: useUploadStore.getState().highlights,
+      highlight: useUploadStore.getState().highlight,
     };
     localStorage.setItem(
       "uploadHistory",
@@ -66,7 +61,7 @@ export const Uploader = () => {
 
   const streamToHighlights = async (
     stream: ReadableStream<Uint8Array>,
-    onHighlight: (highlight: Highlight) => void,
+    onHighlight: (highlight: RawHighlight) => void,
   ) => {
     const reader = stream.getReader();
     const decoder = new TextDecoder("utf-8");

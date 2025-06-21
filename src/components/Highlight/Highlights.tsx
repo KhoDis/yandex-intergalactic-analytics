@@ -1,13 +1,14 @@
 import styles from "./Highlights.module.css";
 import { HighlightCard } from "./HighlightCard.tsx";
-import { type Highlight } from "../../types/types.tsx";
+import type { RawHighlight } from "../../types/types.tsx";
+import { mapRawHighlightToDisplayList } from "../../utils/mapRawHighlightToDisplayList.ts";
 
 export type HighlightsProps = {
-  highlights: Highlight[];
+  highlight: RawHighlight | null;
 };
 
-export const Highlights = ({ highlights }: HighlightsProps) => {
-  if (highlights.length === 0) {
+export const Highlights = ({ highlight }: HighlightsProps) => {
+  if (!highlight) {
     return (
       <span className={styles["no-highlights"]}>
         Здесь
@@ -17,10 +18,12 @@ export const Highlights = ({ highlights }: HighlightsProps) => {
     );
   }
 
+  const displayHighlights = mapRawHighlightToDisplayList(highlight);
+
   return (
     <div className={styles.highlights}>
-      {highlights.map((highlight) => (
-        <HighlightCard key={highlight.label} {...highlight} />
+      {displayHighlights.map((highlight, index) => (
+        <HighlightCard key={index} {...highlight} />
       ))}
     </div>
   );

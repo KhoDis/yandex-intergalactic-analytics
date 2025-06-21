@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Highlight } from "../types/types";
+import type { RawHighlight } from "../types/types";
 
 export type UploadStatus =
   | "idle"
@@ -12,13 +12,13 @@ export type UploadStatus =
 type UploadStore = {
   file: File | null;
   status: UploadStatus;
-  highlights: Highlight[];
+  highlight: RawHighlight | null;
   rows: number;
   isLoading: boolean;
 
   setFile: (file: File | null) => void;
   setStatus: (status: UploadStatus) => void;
-  addHighlight: (highlight: Highlight) => void;
+  setHighlight: (highlight: RawHighlight) => void;
   clearHighlights: () => void;
   setRows: (rows: number) => void;
   setLoading: (state: boolean) => void;
@@ -27,7 +27,7 @@ type UploadStore = {
 export const useUploadStore = create<UploadStore>((set) => ({
   file: null,
   status: "idle",
-  highlights: [],
+  highlight: null,
   rows: 10000,
   isLoading: false,
 
@@ -36,9 +36,11 @@ export const useUploadStore = create<UploadStore>((set) => ({
     console.log("Status changed", status);
     set({ status });
   },
-  addHighlight: (highlight) =>
-    set((state) => ({ highlights: [...state.highlights, highlight] })),
-  clearHighlights: () => set({ highlights: [] }),
+  setHighlight: (highlight) => {
+    console.log("Highlight changed", highlight);
+    set({ highlight });
+  },
+  clearHighlights: () => set({ highlight: null }),
   setRows: (rows) => set({ rows }),
   setLoading: (isLoading) => set({ isLoading }),
 }));
