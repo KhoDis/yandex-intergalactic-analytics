@@ -5,7 +5,7 @@ export type UploadStatus =
   | "idle"
   | "choosing"
   | "uploaded"
-  | "parsing"
+  | "processing"
   | "done"
   | "error";
 

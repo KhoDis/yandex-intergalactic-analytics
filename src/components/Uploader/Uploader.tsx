@@ -1,10 +1,10 @@
 import styles from "./Uploader.module.css";
 import { Button } from "../Button/Button.tsx";
-import { UploadFile } from "../UploadFile/UploadFile.tsx";
 import { aggregate } from "../../api/client.ts";
 import type { RawHighlight } from "../../types/types.tsx";
 import { useUploadStore } from "../../stores/useUploadStore.ts";
 import clsx from "clsx";
+import { FileUpload } from "../FileUpload/FileUpload.tsx";
 
 // export type UploaderProps = {};
 
@@ -118,7 +118,7 @@ export const Uploader = () => {
         )}
       >
         Current status: {status}
-        <UploadFile
+        <FileUpload
           file={file}
           status={status}
           onUpload={handleSetFile}

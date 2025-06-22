@@ -1,0 +1,36 @@
+.upload-container {
+    --upload-border-radius: 10px;
+    --upload-size: 70px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-weight: var(--font-regular);
+    font-size: var(--button-font-size);
+    color: var(--color-text);
+}
+
+.upload-button {
+    border: none;
+    padding: var(--button-padding);
+    border-radius: var(--upload-border-radius);
+    background: #FFFFFF;
+    height: var(--upload-size);
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.upload-text {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+
+    font-weight: var(--font-regular);
+    font-size: var(--button-font-size);
+    color: var(--color-text);
+}
