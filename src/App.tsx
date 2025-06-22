@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router";
 import { GeneratePage } from "./pages/GeneratePage/GeneratePage.tsx";
 import { HistoryPage } from "./pages/HistoryPage/HistoryPage.tsx";
 import { UploadPage } from "./pages/UploadPage/UploadPage.tsx";
-import { Layout } from "./components/Layout/Layout.tsx";
+import { Layout } from "./components/layout/Layout/Layout.tsx";
 
 export const App = () => (
   <>

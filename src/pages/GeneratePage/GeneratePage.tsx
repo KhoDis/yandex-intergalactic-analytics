@@ -1,5 +1,5 @@
 import styles from "./GeneratePage.module.css";
-import { FileGenerate } from "../../components/FileGenerate/FileGenerate.tsx";
+import { FileGenerate } from "../../components/generate/FileGenerate/FileGenerate.tsx";
 import { useGenerateStore } from "../../stores/useGenerateStore.ts";
 
 export const GeneratePage = () => {

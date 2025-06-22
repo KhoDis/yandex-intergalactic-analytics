@@ -1,9 +1,9 @@
 import styles from "./HistoryItemCard.module.css";
 import React from "react";
 import clsx from "clsx";
-import { SmileSadIcon } from "../../assets/icons/SmileSadIcon.tsx";
-import { SmileIcon } from "../../assets/icons/SmileIcon.tsx";
-import type { HistoryEntry } from "../../stores/useHistoryStore.ts";
+import { SmileSadIcon } from "../../../assets/icons/SmileSadIcon.tsx";
+import { SmileIcon } from "../../../assets/icons/SmileIcon.tsx";
+import type { HistoryEntry } from "../../../stores/useHistoryStore.ts";
 
 export type FileNameProps = {
   name: string;

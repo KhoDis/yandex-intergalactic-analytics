@@ -1,4 +1,4 @@
-import type { DisplayHighlight, RawHighlight } from "../types/types.tsx";
+import type { DisplayHighlight, RawHighlight } from "../types/index.tsx";
 
 function numberToDate(num: number) {
   if (num < 0 || num > 364) {

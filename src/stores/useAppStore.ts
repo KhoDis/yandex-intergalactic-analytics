@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { HistoryItem } from "../types/types.tsx";
+import type { HistoryItem } from "../types";
 
 interface AppState {
   history: HistoryItem[];

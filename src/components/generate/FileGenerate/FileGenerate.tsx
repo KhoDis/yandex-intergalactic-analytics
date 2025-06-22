@@ -1,5 +1,5 @@
-import { FileStatus } from "../FileStatus/FileStatus";
-import { Button } from "../Button/Button";
+import { FileStatus } from "../../common/FileStatus/FileStatus.tsx";
+import { Button } from "../../common/Button/Button.tsx";
 import styles from "./FileGenerate.module.css";
 
 export type GenerateStatus = "idle" | "processing" | "done" | "error";

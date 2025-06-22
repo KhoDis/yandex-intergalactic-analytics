@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { RawHighlight } from "../types/types";
+import type { RawHighlight } from "../types";
 
 export type UploadStatus =
   | "idle"

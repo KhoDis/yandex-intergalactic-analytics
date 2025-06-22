@@ -1,14 +1,14 @@
 import styles from "./HistoryPage.module.css";
 import { History } from "./History.tsx";
-import { Button } from "../../components/Button/Button.tsx";
+import { Button } from "../../components/common/Button/Button.tsx";
 import {
   type HistoryEntry,
   useHistoryStore,
 } from "../../stores/useHistoryStore.ts";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Modal } from "../../components/Modal/Modal.tsx";
-import { HighlightListModal } from "../../components/HighlightListModal/HighlightListModal.tsx";
+import { Modal } from "../../components/history/Modal/Modal.tsx";
+import { HighlightListModal } from "../../components/history/HighlightListModal/HighlightListModal.tsx";
 
 const HistoryButtons = () => {
   const navigate = useNavigate();

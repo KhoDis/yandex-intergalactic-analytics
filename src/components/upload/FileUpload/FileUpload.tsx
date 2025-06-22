@@ -1,4 +1,4 @@
-import { FileStatus } from "../FileStatus/FileStatus";
+import { FileStatus } from "../../common/FileStatus/FileStatus.tsx";
 import styles from "./FileUpload.module.css";
 import React from "react";
 

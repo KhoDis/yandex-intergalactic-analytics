@@ -1,6 +1,6 @@
 import styles from "./FileStatus.module.css";
 import clsx from "clsx";
-import { Spinner } from "../../assets/Spinner.tsx";
+import { Spinner } from "../../../assets/Spinner.tsx";
 import { CancelButton } from "../CancelButton/CancelButton.tsx";
 
 export type FileStatus = "uploaded" | "processing" | "done" | "error";

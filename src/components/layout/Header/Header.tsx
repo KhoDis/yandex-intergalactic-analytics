@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import { LogoName } from "./LogoName.tsx";
-import { Navigation } from "./Navigation.tsx";
+import { Navigation } from "../Navigation/Navigation.tsx";
 
 export const Header = () => {
   return (

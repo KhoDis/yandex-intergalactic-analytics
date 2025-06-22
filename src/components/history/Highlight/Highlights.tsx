@@ -1,7 +1,7 @@
 import styles from "./Highlights.module.css";
 import { HighlightCard } from "./HighlightCard.tsx";
-import type { RawHighlight } from "../../types/types.tsx";
-import { mapRawHighlightToDisplayList } from "../../utils/mapRawHighlightToDisplayList.ts";
+import type { RawHighlight } from "../../../types";
+import { mapRawHighlightToDisplayList } from "../../../utils/mapRawHighlightToDisplayList.ts";
 
 export type HighlightsProps = {
   highlight: RawHighlight | null;

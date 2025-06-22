@@ -1,6 +1,6 @@
 import styles from "./HistoryItemRow.module.css";
 import { HistoryItemCard } from "./HistoryItemCard.tsx";
-import type { HistoryEntry } from "../../stores/useHistoryStore.ts";
+import type { HistoryEntry } from "../../../stores/useHistoryStore.ts";
 
 type RemoveButtonProps = {
   onRemove: () => void;

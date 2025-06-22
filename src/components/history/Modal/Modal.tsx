@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
-import { CancelButton } from "../CancelButton/CancelButton.tsx";
+import { CancelButton } from "../../common/CancelButton/CancelButton.tsx";
 
 export type ModalProps = {
   isOpen: boolean;

@@ -1,4 +1,4 @@
-import type { RawHighlight } from "../types/types";
+import type { RawHighlight } from "../types";
 
 export type HistoryStatus = "success" | "error";
 

@@ -1,12 +1,12 @@
 import styles from "./Uploader.module.css";
-import { Button } from "../Button/Button.tsx";
-import { aggregate } from "../../api/client.ts";
-import type { RawHighlight } from "../../types/types.tsx";
-import { useUploadStore } from "../../stores/useUploadStore.ts";
+import { Button } from "../../common/Button/Button.tsx";
+import { aggregate } from "../../../api/client.ts";
+import type { RawHighlight } from "../../../types";
+import { useUploadStore } from "../../../stores/useUploadStore.ts";
 import clsx from "clsx";
 import { FileUpload, type UploadStatus } from "../FileUpload/FileUpload.tsx";
 import React from "react";
-import { historyService } from "../../services/historyService.ts";
+import { historyService } from "../../../services/historyService.ts";
 
 const isValidHighlight = (data: unknown): data is RawHighlight => {
   // {"total_spend_galactic":0,"rows_affected":0,"average_spend_galactic":0}

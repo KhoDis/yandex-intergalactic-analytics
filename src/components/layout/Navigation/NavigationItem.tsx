@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
-import styles from "./Header.module.css";
+import styles from "../Header/Header.module.css";
 import React from "react";
 
 type NavigationItemProps = {

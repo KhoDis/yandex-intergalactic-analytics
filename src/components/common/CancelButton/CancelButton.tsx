@@ -1,4 +1,4 @@
-import styles from "../CancelButton/CancelButton.module.css";
+import styles from "./CancelButton.module.css";
 import clsx from "clsx";
 
 export type CancelButtonProps = {
