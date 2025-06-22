@@ -6,7 +6,7 @@ export type FileStatus = "uploaded" | "processing" | "done" | "error";
 
 export type FileStatusProps = {
   status: FileStatus;
-  fileName?: string;
+  buttonText: string;
   onReset: () => void;
   uploadText?: string;
   processingText: string;
@@ -16,7 +16,7 @@ export type FileStatusProps = {
 
 export const FileStatus = ({
   status,
-  fileName,
+  buttonText,
   onReset,
   uploadText,
   processingText,
@@ -51,7 +51,7 @@ export const FileStatus = ({
           {status === "processing" ? (
             <Spinner className={styles["file-status__spinner"]} />
           ) : (
-            fileName
+            buttonText
           )}
         </span>
         {status !== "processing" && (

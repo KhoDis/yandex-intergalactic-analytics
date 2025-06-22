@@ -1,0 +1,14 @@
+.generate-container {
+    --upload-border-radius: 10px;
+    --upload-size: 70px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-weight: var(--font-regular);
+    font-size: var(--button-font-size);
+    color: var(--color-text);
+}

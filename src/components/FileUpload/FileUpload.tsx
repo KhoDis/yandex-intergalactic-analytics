@@ -44,7 +44,7 @@ export const FileUpload = ({
     return (
       <FileStatus
         status={status}
-        fileName={file.name}
+        buttonText={file.name}
         onReset={onReset}
         uploadText="файл загружен!"
         processingText="идёт парсинг файла"

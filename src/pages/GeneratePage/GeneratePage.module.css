@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.text {
+    font-size: 30px;
+    font-weight: var(--font-regular);
+    color: var(--color-text);
+    text-align: center;
+}
