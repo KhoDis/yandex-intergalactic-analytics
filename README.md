@@ -1,54 +1,123 @@
-# React + TypeScript + Vite
+# 🚀 Intergalactic Analytics Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-интерфейс для Сервиса межгалактической аналитики. Позволяет загружать таблицы с данными, получать аналитику, генерировать тестовые таблицы и просматривать историю загрузок.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Установка и запуск
 
-## Expanding the ESLint configuration
+```bash
+# Клонируем репозиторий
+git clone https://github.com/KhoDis/intergalactic-analytics.git
+cd intergalactic-analytics
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Устанавливаем зависимости
+npm install
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+# Запуск в режиме разработки
+npm run dev
+
+# Сборка проекта
+npm run build
+
+# Проверка линтинга
+npm run lint
+
+# Форматирование кода
+npm run format
+````
+
+---
+
+## 🏗 Архитектура проекта
+
+Приложение построено с использованием модульного подхода и разделено на логические домены:
+
+* `pages/` — страницы: загрузка, генерация, история
+* `components/` — переиспользуемые UI-компоненты
+* `stores/` — Zustand state-менеджеры
+* `styles/` — глобальные и модульные стили
+* `types/` — типы данных
+* `assets/` — иконки, спиннеры и т.д.
+* `api/` — API-клиенты
+* `services/` — сервисы
+* `utils/` — утилитарные функции
+
+---
+
+## ⚙️ Технологический стек
+
+| Технология          | Назначение                   |
+| ------------------- | ---------------------------- |
+| React 19            | Основной UI-фреймворк        |
+| TypeScript          | Статическая типизация        |
+| Vite                | Быстрая сборка               |
+| Zustand             | Глобальное состояние         |
+| react-router-dom v7 | Роутинг                      |
+| Fetch API           | Работа с backend             |
+| React Portals       | Реализация модальных окон    |
+| CSS Modules         | Локальные стили              |
+| ESLint + Prettier   | Линтинг и автоформатирование |
+| LocalStorage        | Хранение истории загрузок    |
+
+---
+
+## 🗂️ Пример структуры
+
+```
+src/
+│
+├── App.tsx                  # Основные маршруты
+├── main.tsx                 # Точка входа
+├── components/
+│   └── layout/              # Хедер, контейнеры
+│   └── upload/              # Компоненты загрузки файлов
+│   └── history/             # Компоненты истории
+│
+├── pages/
+│   └── UploadPage.tsx       # Загрузка и анализ
+│   └── HistoryPage.tsx      # История загрузок
+│   └── GeneratePage.tsx     # Генерация таблиц
+│
+├── stores/
+│   └── useUploadStore.ts    # Zustand-хранилище
+│
+├── styles/
+│   ├── globals.css
+│   └── variables.css
+│
+├── types/
+│   └── index.ts             # Типы для highlights, данных и пр.
+└── assets/                  # Иконки, спиннеры и пр.
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+## 💡 Особенности реализации
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+* Использован **Zustand** для централизованного управления:
+
+    * состояние файла, статуса загрузки, подсветок и загрузки
+* Поддержка **drag & drop** загрузки файлов
+* Индикация статуса (`uploaded`, `processing`, `done`, `error`) с анимацией
+* Стриминговая обработка данных с постепенной подгрузкой (progress UI)
+* **История загрузок** сохраняется в `LocalStorage` и отображается в модальном окне
+* Используется **React Router v7** с вложенными роутами
+* Соблюдены требования по техническим ограничениям (без сторонних UI-библиотек)
+
+---
+
+## 🛰 Backend API
+
+Интеграция с backend, разработанным на Node.js с поддержкой следующих эндпоинтов:
+
+* `GET /report` — генерация тестовых CSV-отчётов
+* `POST /aggregate` — агрегация данных из загруженного файла
+
+---
+
+## 🧼 Качество кода
+
+* Настроен **ESLint** с рекомендациями React и TypeScript
+* Используется **Prettier** для автоформатирования
+* Линтинг и форматирование доступны через `npm run lint` и `npm run format`
