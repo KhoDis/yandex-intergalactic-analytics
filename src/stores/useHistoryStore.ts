@@ -1,76 +1,56 @@
 import { create } from "zustand";
-import type { RawHighlight } from "../types/types";
+import { type HistoryRecord, historyService } from "../services/historyService";
 
-export type HistoryEntry = {
+export type HistoryEntry = HistoryRecord & {
   id: string;
-  date: string;
-  fileName: string;
-  highlight: RawHighlight;
-  isSuccess: boolean;
 };
 
 type HistoryStore = {
   history: HistoryEntry[];
-  selectedHighlight: RawHighlight | null;
+  selectedHistoryEntry: HistoryEntry | null;
   isModalOpen: boolean;
 
   loadHistory: () => void;
   removeHistoryItem: (id: string) => void;
   clearHistory: () => void;
-  openModal: (highlight: RawHighlight) => void;
+  openModal: (historyEntry: HistoryEntry) => void;
   closeModal: () => void;
 };
 
 export const useHistoryStore = create<HistoryStore>((set, get) => ({
   history: [],
-  selectedHighlight: null,
+  selectedHistoryEntry: null,
   isModalOpen: false,
 
   loadHistory: () => {
-    try {
-      const stored = localStorage.getItem("uploadHistory");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        const historyWithIds = parsed.map((item: any, index: number) => ({
-          id: `${item.date}-${index}`,
-          date: item.date,
-          fileName: item.fileName,
-          highlight: item.highlight,
-          isSuccess: true,
-        }));
-        set({ history: historyWithIds });
-      }
-    } catch (error) {
-      console.error("Error loading history:", error);
-      set({ history: [] });
+    const raw = historyService.getAll();
+    const withIds = raw.map((item, index) => ({
+      ...item,
+      id: `${item.date}-${index}`,
+    }));
+    set({ history: withIds });
+  },
+
+  removeHistoryItem: (id) => {
+    const index = get().history.findIndex((item) => item.id === id);
+    if (index >= 0) {
+      historyService.remove(index);
+      const updated = [...get().history];
+      updated.splice(index, 1);
+      set({ history: updated });
     }
   },
 
-  removeHistoryItem: (id: string) => {
-    const { history } = get();
-    const updatedHistory = history.filter((item) => item.id !== id);
-
-    // Обновляем localStorage
-    const storageData = updatedHistory.map((item) => ({
-      date: item.date,
-      fileName: item.fileName,
-      highlight: item.highlight,
-    }));
-    localStorage.setItem("uploadHistory", JSON.stringify(storageData));
-
-    set({ history: updatedHistory });
-  },
-
   clearHistory: () => {
-    localStorage.removeItem("uploadHistory");
+    historyService.clear();
     set({ history: [] });
   },
 
-  openModal: (highlight: RawHighlight) => {
-    set({ selectedHighlight: highlight, isModalOpen: true });
+  openModal: (historyEntry) => {
+    set({ selectedHistoryEntry: historyEntry, isModalOpen: true });
   },
 
   closeModal: () => {
-    set({ selectedHighlight: null, isModalOpen: false });
+    set({ selectedHistoryEntry: null, isModalOpen: false });
   },
 }));

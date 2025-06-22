@@ -6,6 +6,46 @@ import { useUploadStore } from "../../stores/useUploadStore.ts";
 import clsx from "clsx";
 import { FileUpload, type UploadStatus } from "../FileUpload/FileUpload.tsx";
 import React from "react";
+import { historyService } from "../../services/historyService.ts";
+
+const isValidHighlight = (data: unknown): data is RawHighlight => {
+  // {"total_spend_galactic":0,"rows_affected":0,"average_spend_galactic":0}
+  // Special case scenario
+  if (
+    typeof data === "object" &&
+    data !== null &&
+    "total_spend_galactic" in data &&
+    "rows_affected" in data &&
+    "average_spend_galactic" in data &&
+    typeof data.total_spend_galactic === "number" &&
+    typeof data.rows_affected === "number" &&
+    typeof data.average_spend_galactic === "number"
+  ) {
+    return true;
+  }
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    "total_spend_galactic" in data &&
+    "rows_affected" in data &&
+    "less_spent_at" in data &&
+    "big_spent_at" in data &&
+    "less_spent_value" in data &&
+    "big_spent_value" in data &&
+    "average_spend_galactic" in data &&
+    "big_spent_civ" in data &&
+    "less_spent_civ" in data &&
+    typeof data.total_spend_galactic === "number" &&
+    typeof data.rows_affected === "number" &&
+    typeof data.less_spent_at === "number" &&
+    typeof data.big_spent_at === "number" &&
+    typeof data.less_spent_value === "number" &&
+    typeof data.big_spent_value === "number" &&
+    typeof data.average_spend_galactic === "number" &&
+    typeof data.big_spent_civ === "string" &&
+    typeof data.less_spent_civ === "string"
+  );
+};
 
 export const Uploader = () => {
   const {
@@ -39,10 +79,23 @@ export const Uploader = () => {
 
       setStatus("done");
 
-      saveToHistory(file.name); // localStorage
+      historyService.add({
+        date: new Date().toISOString(),
+        fileName: file.name,
+        highlight: useUploadStore.getState().highlight,
+        status: "success",
+      });
     } catch (err) {
       console.error(err);
       setStatus("error");
+
+      historyService.add({
+        date: new Date().toISOString(),
+        fileName: file.name,
+        highlight: null,
+        status: "error",
+        error: err instanceof Error ? err.message : "Unknown error",
+      });
     } finally {
       setLoading(false);
     }
@@ -80,19 +133,6 @@ export const Uploader = () => {
     }
   };
 
-  const saveToHistory = (fileName: string) => {
-    const current = JSON.parse(localStorage.getItem("uploadHistory") || "[]");
-    const newEntry = {
-      date: new Date().toISOString(),
-      fileName,
-      highlight: useUploadStore.getState().highlight,
-    };
-    localStorage.setItem(
-      "uploadHistory",
-      JSON.stringify([newEntry, ...current]),
-    );
-  };
-
   const streamToHighlights = async (
     stream: ReadableStream<Uint8Array>,
     onHighlight: (highlight: RawHighlight) => void,
@@ -115,9 +155,15 @@ export const Uploader = () => {
 
         try {
           const json = JSON.parse(chunk);
-          onHighlight(json);
+          if (isValidHighlight(json)) {
+            onHighlight(json);
+          } else {
+            console.warn("Invalid highlight object:", json);
+            throw new Error("Invalid highlight object");
+          }
         } catch (err) {
           console.error("Bad JSON chunk:", chunk, err);
+          throw err;
         }
       }
     }
@@ -155,7 +201,6 @@ export const Uploader = () => {
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
-        Current status: {status}
         <FileUpload
           file={file}
           status={status}

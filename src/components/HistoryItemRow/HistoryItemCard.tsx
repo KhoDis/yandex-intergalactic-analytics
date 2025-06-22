@@ -77,8 +77,8 @@ export const HistoryItemCard = ({ item, onClick }: HistoryItemCardProps) => {
     <div className={styles.card} onClick={onClick}>
       <FileName name={item.fileName} />
       <FileDate date={item.date} />
-      <FileStatusSuccess isGrayedOut={!item.isSuccess} />
-      <FileStatusError isGrayedOut={item.isSuccess} />
+      <FileStatusSuccess isGrayedOut={!item.highlight} />
+      <FileStatusError isGrayedOut={!!item.highlight} />
     </div>
   );
 };

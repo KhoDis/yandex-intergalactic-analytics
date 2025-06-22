@@ -1,10 +1,12 @@
 import styles from "./HistoryPage.module.css";
 import { History } from "./History.tsx";
 import { Button } from "../../components/Button/Button.tsx";
-import { useHistoryStore } from "../../stores/useHistoryStore.ts";
+import {
+  type HistoryEntry,
+  useHistoryStore,
+} from "../../stores/useHistoryStore.ts";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import type { RawHighlight } from "../../types/types.tsx";
 import { Modal } from "../../components/Modal/Modal.tsx";
 import { HighlightListModal } from "../../components/HighlightListModal/HighlightListModal.tsx";
 
@@ -35,7 +37,7 @@ const HistoryButtons = () => {
 export const HistoryPage = () => {
   const {
     history,
-    selectedHighlight,
+    selectedHistoryEntry,
     isModalOpen,
     loadHistory,
     removeHistoryItem,
@@ -48,8 +50,8 @@ export const HistoryPage = () => {
     loadHistory();
   }, [loadHistory]);
 
-  const handleItemClick = (highlight: RawHighlight) => {
-    openModal(highlight);
+  const handleItemClick = (historyEntry: HistoryEntry) => {
+    openModal(historyEntry);
   };
 
   const handleItemRemove = (id: string) => {
@@ -66,7 +68,7 @@ export const HistoryPage = () => {
       <HistoryButtons />
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <HighlightListModal highlight={selectedHighlight} />
+        <HighlightListModal historyEntry={selectedHistoryEntry} />
       </Modal>
     </div>
   );
