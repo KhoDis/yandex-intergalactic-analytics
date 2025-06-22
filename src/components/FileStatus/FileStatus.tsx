@@ -1,6 +1,7 @@
 import styles from "./FileStatus.module.css";
 import clsx from "clsx";
 import { Spinner } from "../../assets/Spinner.tsx";
+import { CancelButton } from "../CancelButton/CancelButton.tsx";
 
 export type FileStatus = "uploaded" | "processing" | "done" | "error";
 
@@ -54,11 +55,7 @@ export const FileStatus = ({
             buttonText
           )}
         </span>
-        {status !== "processing" && (
-          <button className={styles["file-status__close"]} onClick={onReset}>
-            <img src="/cancel-icon.svg" alt="close" />
-          </button>
-        )}
+        {status !== "processing" && <CancelButton onClick={onReset} />}
       </div>
       <div className={styles["file-status__subtext"]}>{getStatusText()}</div>
     </div>

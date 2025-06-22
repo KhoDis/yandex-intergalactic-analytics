@@ -3,6 +3,7 @@ import React from "react";
 import clsx from "clsx";
 import { SmileSadIcon } from "../../assets/icons/SmileSadIcon.tsx";
 import { SmileIcon } from "../../assets/icons/SmileIcon.tsx";
+import type { HistoryEntry } from "../../stores/useHistoryStore.ts";
 
 export type FileNameProps = {
   name: string;
@@ -22,7 +23,8 @@ export type FileDateProps = {
 };
 
 const FileDate = ({ date }: FileDateProps) => {
-  return <span className={styles.date}>{date}</span>;
+  const formattedDate = new Date(date).toLocaleDateString("ru-RU");
+  return <span className={styles.date}>{formattedDate}</span>;
 };
 
 export type FileStatusProps = {
@@ -32,7 +34,6 @@ export type FileStatusProps = {
 };
 
 const FileStatus = ({ text, icon, isGrayedOut = false }: FileStatusProps) => {
-  console.log("Hey, ", styles["file-status"]);
   return (
     <div
       className={clsx(
@@ -66,13 +67,18 @@ const FileStatusSuccess = ({ isGrayedOut }: { isGrayedOut: boolean }) => {
   );
 };
 
-export const HistoryItemCard = () => {
+export type HistoryItemCardProps = {
+  item: HistoryEntry;
+  onClick?: () => void;
+};
+
+export const HistoryItemCard = ({ item, onClick }: HistoryItemCardProps) => {
   return (
-    <div className={styles.card}>
-      <FileName name="test.csv" />
-      <FileDate date="01.01.2023" />
-      <FileStatusSuccess isGrayedOut={false} />
-      <FileStatusError isGrayedOut={true} />
+    <div className={styles.card} onClick={onClick}>
+      <FileName name={item.fileName} />
+      <FileDate date={item.date} />
+      <FileStatusSuccess isGrayedOut={!item.isSuccess} />
+      <FileStatusError isGrayedOut={item.isSuccess} />
     </div>
   );
 };

@@ -1,32 +1,32 @@
-import styles from "./Highlights.module.css";
-import { HighlightCard } from "./HighlightCard.tsx";
+import styles from "./HighlightListModal.module.css";
+import { HighlightCard } from "../Highlight/HighlightCard.tsx";
 import type { RawHighlight } from "../../types/types.tsx";
 import { mapRawHighlightToDisplayList } from "../../utils/mapRawHighlightToDisplayList.ts";
 
-export type HighlightsProps = {
+export type HighlightListModalProps = {
   highlight: RawHighlight | null;
 };
 
-export const Highlights = ({ highlight }: HighlightsProps) => {
+export const HighlightListModal = ({ highlight }: HighlightListModalProps) => {
   if (!highlight) {
     return (
-      <span className={styles["no-highlights"]}>
+      <div className={styles.empty}>
         Здесь
         <br />
         появятся хайлайты
-      </span>
+      </div>
     );
   }
 
   const displayHighlights = mapRawHighlightToDisplayList(highlight);
 
   return (
-    <div className={styles.highlights}>
-      {displayHighlights.map((highlight, index) => (
+    <div className={styles["highlight-list"]}>
+      {displayHighlights.map((item, index) => (
         <HighlightCard
           key={index}
-          {...highlight}
-          className={styles["highlight"]}
+          {...item}
+          className={styles["highlight-item"]}
         />
       ))}
     </div>

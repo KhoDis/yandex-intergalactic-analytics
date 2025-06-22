@@ -45,20 +45,6 @@
     color: var(--color-text);
 }
 
-.file-status__close {
-    background: var(--button-color-dark);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    width: 70px;
-    height: 70px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
 .file-status__spinner {
     animation: rotate 1s linear infinite;
     width: 40px;

@@ -18,3 +18,9 @@ export type RawHighlight = {
   big_spent_civ: string;
   less_spent_civ: string;
 };
+
+export type HistoryRecord = {
+  date: string;
+  fileName: string;
+  highlight: RawHighlight;
+};
