@@ -1,65 +1,75 @@
 .file-status {
-    --upload-border-radius: 10px;
-    --upload-size: 70px;
+  --upload-border-radius: 10px;
+  --upload-size: 70px;
 
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-    font-weight: var(--font-regular);
-    font-size: var(--button-font-size);
-    color: var(--color-text);
+  font-weight: var(--font-regular);
+  font-size: var(--button-font-size);
+  color: var(--color-text);
 }
 
 .file-status__text {
-    border: none;
-    padding: var(--button-padding);
-    border-radius: var(--upload-border-radius);
-    background: #FFFFFF;
-    height: var(--upload-size);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: none;
+  padding: var(--button-padding);
+  border-radius: var(--upload-border-radius);
+  background: #ffffff;
+  height: var(--upload-size);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.file-status__text--uploaded { background: #e0b0ff; }
-.file-status__text--processing { background: #d9b3ff; width: 300px; }
-.file-status__text--done { background: #d0f0c0; }
-.file-status__text--error { background: #ff6f42; color: white; }
+.file-status__text--uploaded {
+  background: #e0b0ff;
+}
+.file-status__text--processing {
+  background: #d9b3ff;
+  width: 300px;
+}
+.file-status__text--done {
+  background: #d0f0c0;
+}
+.file-status__text--error {
+  background: #ff6f42;
+  color: white;
+}
 
 .file-status__button-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .file-status__subtext {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
 
-    font-weight: var(--font-regular);
-    font-size: var(--button-font-size);
-    color: var(--color-text);
+  font-weight: var(--font-regular);
+  font-size: var(--button-font-size);
+  color: var(--color-text);
 }
 
 .file-status__spinner {
-    animation: rotate 1s linear infinite;
-    width: 40px;
-    height: 40px;
+  animation: rotate 1s linear infinite;
+  width: 40px;
+  height: 40px;
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

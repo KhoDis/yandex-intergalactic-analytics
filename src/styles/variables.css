@@ -1,25 +1,25 @@
 :root {
-    --color-bg: #FCE2FF;
-    --color-text: #201B10;
-    --color-primary: #CB81FF;
-    --color-primary-light: #EACDFF;
-    --color-success-light: #D4FAE6;
-    --color-disabled: #787878;
-    --color-text-primary: #CB81FF;
-    --color-error: #FF5F00;
+  --color-bg: #fce2ff;
+  --color-text: #201b10;
+  --color-primary: #cb81ff;
+  --color-primary-light: #eacdff;
+  --color-success-light: #d4fae6;
+  --color-disabled: #787878;
+  --color-text-primary: #cb81ff;
+  --color-error: #ff5f00;
 
-    --font-main: 'Roboto', sans-serif;
-    --font-regular: 400;
-    --font-medium: 500;
-    --font-bold: 700;
-    --font-size: 1.875rem;
+  --font-main: "Roboto", sans-serif;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  --font-size: 1.875rem;
 
-    --button-padding: 15px 27px 15px 27px;
-    --button-border-radius: 25px;
-    --button-font-size: 35px;
-    --button-color-dark: #201B10;
+  --button-padding: 15px 27px 15px 27px;
+  --button-border-radius: 25px;
+  --button-font-size: 35px;
+  --button-color-dark: #201b10;
 }
 
 body {
-    font-family: var(--font-main), sans-serif;
+  font-family: var(--font-main), sans-serif;
 }

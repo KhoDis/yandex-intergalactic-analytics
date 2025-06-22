@@ -1,31 +1,31 @@
 .button {
-    height: 80px;
-    padding: 15px 27px 15px 27px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
+  height: 80px;
+  padding: 15px 27px 15px 27px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 
-    font-weight: 500;
-    font-size: 35px;
+  font-weight: 500;
+  font-size: 35px;
 }
 
 .button--submit {
-    background-color: #2AE881;
-    color: #201B10;
+  background-color: #2ae881;
+  color: #201b10;
 }
 
 .button--download {
-    background-color: #FCE300;
-    color: #201B10;
+  background-color: #fce300;
+  color: #201b10;
 }
 
 .button--clear {
-    background-color: var(--button-color-dark);
-    color: #FFFFFF;
+  background-color: var(--button-color-dark);
+  color: #ffffff;
 }
 
 .button--disabled {
-    background-color: #C0C0C0;
-    color: #787878;
-    cursor: not-allowed;
+  background-color: #c0c0c0;
+  color: #787878;
+  cursor: not-allowed;
 }

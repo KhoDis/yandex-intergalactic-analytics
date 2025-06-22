@@ -1,13 +1,13 @@
 .cancel-button {
-    background: var(--button-color-dark);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    width: 70px;
-    height: 70px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  background: var(--button-color-dark);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }

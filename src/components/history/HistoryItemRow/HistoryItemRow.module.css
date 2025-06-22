@@ -1,18 +1,18 @@
 .row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 .remove-button {
-    border: none;
-    cursor: pointer;
-    height: 87px;
-    width: 87px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
+  border: none;
+  cursor: pointer;
+  height: 87px;
+  width: 87px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
 }
