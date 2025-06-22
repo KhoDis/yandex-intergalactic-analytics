@@ -88,6 +88,7 @@ export const Uploader = () => {
     } catch (err) {
       console.error(err);
       setStatus("error");
+      setHighlight(null);
 
       historyService.add({
         date: new Date().toISOString(),

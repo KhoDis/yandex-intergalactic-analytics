@@ -1,4 +1,4 @@
-import styles from "../Header/Header.module.css";
+import styles from "./Navigation.module.css";
 import { NavigationItem } from "./NavigationItem.tsx";
 
 export const Navigation = () => (

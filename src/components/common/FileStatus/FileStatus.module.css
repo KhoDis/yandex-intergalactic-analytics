@@ -20,6 +20,9 @@
     background: #FFFFFF;
     height: var(--upload-size);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .file-status__text--uploaded { background: #e0b0ff; }
@@ -30,6 +33,7 @@
 .file-status__button-row {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 

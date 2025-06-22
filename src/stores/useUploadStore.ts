@@ -18,7 +18,7 @@ type UploadStore = {
 
   setFile: (file: File | null) => void;
   setStatus: (status: UploadStatus) => void;
-  setHighlight: (highlight: RawHighlight) => void;
+  setHighlight: (highlight: RawHighlight | null) => void;
   clearHighlights: () => void;
   setRows: (rows: number) => void;
   setLoading: (state: boolean) => void;
