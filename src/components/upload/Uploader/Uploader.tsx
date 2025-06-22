@@ -1,51 +1,12 @@
 import styles from "./Uploader.module.css";
 import { Button } from "../../common/Button/Button.tsx";
 import { aggregate } from "../../../api/client.ts";
-import type { RawHighlight } from "../../../types";
 import { useUploadStore } from "../../../stores/useUploadStore.ts";
 import clsx from "clsx";
 import { FileUpload, type UploadStatus } from "../FileUpload/FileUpload.tsx";
-import React from "react";
+import React, { useRef } from "react";
 import { historyService } from "../../../services/historyService.ts";
-
-const isValidHighlight = (data: unknown): data is RawHighlight => {
-  // {"total_spend_galactic":0,"rows_affected":0,"average_spend_galactic":0}
-  // Special case scenario
-  if (
-    typeof data === "object" &&
-    data !== null &&
-    "total_spend_galactic" in data &&
-    "rows_affected" in data &&
-    "average_spend_galactic" in data &&
-    typeof data.total_spend_galactic === "number" &&
-    typeof data.rows_affected === "number" &&
-    typeof data.average_spend_galactic === "number"
-  ) {
-    return true;
-  }
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    "total_spend_galactic" in data &&
-    "rows_affected" in data &&
-    "less_spent_at" in data &&
-    "big_spent_at" in data &&
-    "less_spent_value" in data &&
-    "big_spent_value" in data &&
-    "average_spend_galactic" in data &&
-    "big_spent_civ" in data &&
-    "less_spent_civ" in data &&
-    typeof data.total_spend_galactic === "number" &&
-    typeof data.rows_affected === "number" &&
-    typeof data.less_spent_at === "number" &&
-    typeof data.big_spent_at === "number" &&
-    typeof data.less_spent_value === "number" &&
-    typeof data.big_spent_value === "number" &&
-    typeof data.average_spend_galactic === "number" &&
-    typeof data.big_spent_civ === "string" &&
-    typeof data.less_spent_civ === "string"
-  );
-};
+import { uploadService } from "../../../services/uploadService.ts";
 
 export const Uploader = () => {
   const {
@@ -59,8 +20,7 @@ export const Uploader = () => {
     clearHighlights,
   } = useUploadStore();
 
-  const [previousStatus, setPreviousStatus] =
-    React.useState<UploadStatus>(status);
+  const previousStatus = useRef<UploadStatus>(status);
 
   const handleFileUpload = async () => {
     if (!file) return;
@@ -75,7 +35,7 @@ export const Uploader = () => {
       setStatus("processing");
 
       // Long process here
-      await streamToHighlights(stream, setHighlight);
+      await uploadService.streamToHighlights(stream, setHighlight);
 
       setStatus("done");
 
@@ -107,7 +67,7 @@ export const Uploader = () => {
     e.stopPropagation();
 
     if (status === "choosing") return;
-    setPreviousStatus(status);
+    previousStatus.current = status;
     setStatus("choosing");
   };
 
@@ -115,7 +75,8 @@ export const Uploader = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    setStatus(previousStatus);
+    if (status !== "choosing") return;
+    setStatus(previousStatus.current);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -131,42 +92,6 @@ export const Uploader = () => {
     if (file) {
       setFile(file);
       setStatus("uploaded");
-    }
-  };
-
-  const streamToHighlights = async (
-    stream: ReadableStream<Uint8Array>,
-    onHighlight: (highlight: RawHighlight) => void,
-  ) => {
-    const reader = stream.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let buffer = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-
-      let boundary;
-      while ((boundary = buffer.indexOf("\n")) >= 0) {
-        const chunk = buffer.slice(0, boundary).trim();
-        buffer = buffer.slice(boundary + 1);
-        if (!chunk) continue;
-
-        try {
-          const json = JSON.parse(chunk);
-          if (isValidHighlight(json)) {
-            onHighlight(json);
-          } else {
-            console.warn("Invalid highlight object:", json);
-            throw new Error("Invalid highlight object");
-          }
-        } catch (err) {
-          console.error("Bad JSON chunk:", chunk, err);
-          throw err;
-        }
-      }
     }
   };
 

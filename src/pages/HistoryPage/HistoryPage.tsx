@@ -1,5 +1,5 @@
 import styles from "./HistoryPage.module.css";
-import { History } from "./History.tsx";
+import { History } from "../../components/history/History/History.tsx";
 import { Button } from "../../components/common/Button/Button.tsx";
 import {
   type HistoryEntry,

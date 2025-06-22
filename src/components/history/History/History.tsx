@@ -1,6 +1,6 @@
 import styles from "./History.module.css";
-import { HistoryItemRow } from "../../components/history/HistoryItemRow/HistoryItemRow.tsx";
-import type { HistoryEntry } from "../../stores/useHistoryStore.ts";
+import { HistoryItemRow } from "../HistoryItemRow/HistoryItemRow.tsx";
+import type { HistoryEntry } from "../../../stores/useHistoryStore.ts";
 
 export type HistoryProps = {
   history: HistoryEntry[];
