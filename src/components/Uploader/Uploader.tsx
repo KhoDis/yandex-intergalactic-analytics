@@ -48,13 +48,12 @@ export const Uploader = () => {
     }
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (previousStatus !== "choosing") {
-      setPreviousStatus(status);
-    }
+    if (status === "choosing") return;
+    setPreviousStatus(status);
     setStatus("choosing");
   };
 
@@ -65,12 +64,20 @@ export const Uploader = () => {
     setStatus(previousStatus);
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     const file = e.dataTransfer.files?.[0];
-    if (file) handleSetFile(file);
+    if (file) {
+      setFile(file);
+      setStatus("uploaded");
+    }
   };
 
   const saveToHistory = (fileName: string) => {
@@ -143,8 +150,9 @@ export const Uploader = () => {
             status === "processing") &&
             styles["uploader__window--uploaded"],
         )}
-        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
         Current status: {status}
