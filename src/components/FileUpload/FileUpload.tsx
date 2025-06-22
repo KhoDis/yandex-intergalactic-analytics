@@ -15,7 +15,7 @@ export type FileUploadProps = {
   status: UploadStatus;
   onUpload: (file: File) => void;
   onReset: () => void;
-  onChoose: () => void;
+  setStatus: (status: UploadStatus) => void;
 };
 
 export const FileUpload = ({
@@ -23,14 +23,12 @@ export const FileUpload = ({
   status,
   onUpload,
   onReset,
-  onChoose,
+  setStatus,
 }: FileUploadProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) onUpload(file);
   };
-
-  console.log("FileUpload", file, status);
 
   // No file yet
   if (
@@ -40,7 +38,6 @@ export const FileUpload = ({
       status === "done" ||
       status === "error")
   ) {
-    console.log("File is uploaded");
     return (
       <FileStatus
         status={status}
@@ -56,7 +53,10 @@ export const FileUpload = ({
 
   return (
     <div className={styles["upload-container"]}>
-      <label className={styles["upload-button"]} onClick={onChoose}>
+      <label
+        className={styles["upload-button"]}
+        onClick={() => setStatus("choosing")}
+      >
         Загрузить файл
         <input type="file" onChange={handleFileChange} hidden />
       </label>

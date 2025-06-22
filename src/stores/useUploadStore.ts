@@ -32,14 +32,8 @@ export const useUploadStore = create<UploadStore>((set) => ({
   isLoading: false,
 
   setFile: (file) => set({ file }),
-  setStatus: (status) => {
-    console.log("Status changed", status);
-    set({ status });
-  },
-  setHighlight: (highlight) => {
-    console.log("Highlight changed", highlight);
-    set({ highlight });
-  },
+  setStatus: (status) => set({ status }),
+  setHighlight: (highlight) => set({ highlight }),
   clearHighlights: () => set({ highlight: null }),
   setRows: (rows) => set({ rows }),
   setLoading: (isLoading) => set({ isLoading }),

@@ -4,9 +4,8 @@ import { aggregate } from "../../api/client.ts";
 import type { RawHighlight } from "../../types/types.tsx";
 import { useUploadStore } from "../../stores/useUploadStore.ts";
 import clsx from "clsx";
-import { FileUpload } from "../FileUpload/FileUpload.tsx";
-
-// export type UploaderProps = {};
+import { FileUpload, type UploadStatus } from "../FileUpload/FileUpload.tsx";
+import React from "react";
 
 export const Uploader = () => {
   const {
@@ -19,6 +18,9 @@ export const Uploader = () => {
     setHighlight,
     clearHighlights,
   } = useUploadStore();
+
+  const [previousStatus, setPreviousStatus] =
+    React.useState<UploadStatus>(status);
 
   const handleFileUpload = async () => {
     if (!file) return;
@@ -44,6 +46,31 @@ export const Uploader = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (previousStatus !== "choosing") {
+      setPreviousStatus(status);
+    }
+    setStatus("choosing");
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setStatus(previousStatus);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const file = e.dataTransfer.files?.[0];
+    if (file) handleSetFile(file);
   };
 
   const saveToHistory = (fileName: string) => {
@@ -116,6 +143,9 @@ export const Uploader = () => {
             status === "processing") &&
             styles["uploader__window--uploaded"],
         )}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
       >
         Current status: {status}
         <FileUpload
@@ -123,7 +153,7 @@ export const Uploader = () => {
           status={status}
           onUpload={handleSetFile}
           onReset={resetAll}
-          onChoose={() => setStatus("choosing")}
+          setStatus={setStatus}
         />
       </div>
       <Button type={"submit"} onClick={handleFileUpload}>
