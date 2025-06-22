@@ -25,12 +25,12 @@ export const Uploader = () => {
 
     try {
       setLoading(true);
-      setStatus("parsing");
+      setStatus("processing");
 
       const stream = await aggregate(file, rows);
       if (!stream) throw new Error("No stream");
 
-      setStatus("parsing");
+      setStatus("processing");
 
       // Long process here
       await streamToHighlights(stream, setHighlight);
@@ -113,7 +113,7 @@ export const Uploader = () => {
           status === "error" && styles["uploader__window--error"],
           (status === "uploaded" ||
             status === "done" ||
-            status === "parsing") &&
+            status === "processing") &&
             styles["uploader__window--uploaded"],
         )}
       >

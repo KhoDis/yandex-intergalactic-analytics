@@ -30,7 +30,7 @@ export const UploadFile = ({
         return "или перетащите сюда";
       case "uploaded":
         return "файл загружен!";
-      case "parsing":
+      case "processing":
         return "идёт парсинг файла";
       case "done":
         return "готово!";
