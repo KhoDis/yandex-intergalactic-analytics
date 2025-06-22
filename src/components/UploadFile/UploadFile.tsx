@@ -59,16 +59,23 @@ export const UploadFile = ({
       )}
 
       {file && (
-        <div
-          className={clsx(
-            styles["upload-button__file"],
-            styles[`upload-button__file--${status}`],
-          )}
-        >
-          {file.name}
-          <button className={styles["upload-button__close"]} onClick={onReset}>
-            <img src="/cancel-icon.svg" alt="close" />
-          </button>
+        <>
+          <div className={styles["upload-button__row"]}>
+            <span
+              className={clsx(
+                styles["upload-button__file"],
+                styles[`upload-button__file--${status}`],
+              )}
+            >
+              {file.name}
+            </span>
+            <button
+              className={styles["upload-button__row__close"]}
+              onClick={onReset}
+            >
+              <img src="/cancel-icon.svg" alt="close" />
+            </button>
+          </div>
           <div className={styles["upload-button__text"]}>
             {status === "parsing" ? (
               <div className="upload-button__spinner" />
@@ -76,7 +83,7 @@ export const UploadFile = ({
               getStatusText(status)
             )}
           </div>
-        </div>
+        </>
       )}
     </div>
   );
