@@ -12,6 +12,7 @@ export const CancelButton = ({
   <button
     className={clsx(styles["cancel-button"], className)}
     onClick={onClick}
+    data-testid="cancel-button"
   >
     <img src="/cancel-icon.svg" alt="close" />
   </button>
