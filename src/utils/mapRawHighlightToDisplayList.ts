@@ -1,6 +1,6 @@
 import type { DisplayHighlight, RawHighlight } from "../types";
 
-function numberToDate(num: number) {
+export function numberToDate(num: number) {
   if (num < 0 || num > 364) {
     throw new Error("Number must be between 0 and 364");
   }
