@@ -1,5 +1,5 @@
 import styles from "./HighlightListModal.module.css";
-import { HighlightCard } from "../Highlight/HighlightCard.tsx";
+import { HighlightCard } from "../Highlights/HighlightCard.tsx";
 import { mapRawHighlightToDisplayList } from "../../../utils/mapRawHighlightToDisplayList.ts";
 import type { HistoryEntry } from "../../../stores/useHistoryStore.ts";
 

@@ -1,5 +1,5 @@
 import { Uploader } from "../../components/upload/Uploader/Uploader.tsx";
-import { Highlights } from "../../components/history/Highlight/Highlights.tsx";
+import { Highlights } from "../../components/history/Highlights/Highlights.tsx";
 import styles from "./UploadPage.module.css";
 import { useUploadStore } from "../../stores/useUploadStore.ts";
 
