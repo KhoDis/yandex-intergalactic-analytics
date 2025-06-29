@@ -11,7 +11,6 @@ export type ModalProps = {
 
 export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   useEffect(() => {
-    // TODO
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();

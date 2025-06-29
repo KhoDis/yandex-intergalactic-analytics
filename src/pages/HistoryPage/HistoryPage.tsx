@@ -47,7 +47,11 @@ export const HistoryPage = () => {
 
   // We need to load it on mount
   useEffect(() => {
-    loadHistory();
+    try {
+      loadHistory();
+    } catch (error) {
+      console.error(error);
+    }
   }, [loadHistory]);
 
   const handleItemClick = (historyEntry: HistoryEntry) => {
