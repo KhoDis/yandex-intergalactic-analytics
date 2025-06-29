@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, describe, it } from "vitest";
-import { FileUpload } from "../../../components/upload/FileUpload/FileUpload.tsx";
+import { FileUpload } from "./FileUpload.tsx";
 
 describe("FileUpload", () => {
   it("displays the filename when status is 'uploaded'", () => {
