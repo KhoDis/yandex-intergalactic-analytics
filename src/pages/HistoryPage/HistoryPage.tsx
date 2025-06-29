@@ -5,7 +5,7 @@ import {
   type HistoryEntry,
   useHistoryStore,
 } from "../../stores/useHistoryStore.ts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { Modal } from "../../components/history/Modal/Modal.tsx";
 import { HighlightListModal } from "../../components/history/HighlightListModal/HighlightListModal.tsx";
@@ -59,7 +59,7 @@ export const HistoryPage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="history-page">
       <History
         history={history}
         onItemClick={handleItemClick}

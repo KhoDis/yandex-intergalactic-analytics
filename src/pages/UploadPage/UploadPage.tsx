@@ -7,7 +7,7 @@ export const UploadPage = () => {
   const { highlight } = useUploadStore();
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="upload-page">
       <Uploader />
       <Highlights highlight={highlight} />
     </div>

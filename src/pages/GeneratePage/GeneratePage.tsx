@@ -6,7 +6,7 @@ export const GeneratePage = () => {
   const { status, generate, reset } = useGenerateStore();
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="generate-page">
       <span className={styles.text}>
         Сгенерируйте готовый csv-файл нажатием одной кнопки
       </span>
