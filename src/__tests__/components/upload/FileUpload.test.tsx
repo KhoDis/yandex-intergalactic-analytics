@@ -1,10 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { expect, describe, it } from "vitest";
 import { FileUpload } from "../../../components/upload/FileUpload/FileUpload.tsx";
 
 describe("FileUpload", () => {
   it("displays the filename when status is 'uploaded'", () => {
-    const testFile = new File(["data"], "test.csv");
+    const testFile = new File(["data"], "report.csv");
 
     render(
       <FileUpload
@@ -16,6 +16,6 @@ describe("FileUpload", () => {
       />,
     );
 
-    expect(screen.getByText("test.csv")).toBeInTheDocument();
+    expect(screen.getByText("report.csv")).toBeInTheDocument();
   });
 });
